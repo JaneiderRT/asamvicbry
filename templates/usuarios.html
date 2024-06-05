@@ -1,0 +1,44 @@
+{% extends 'base/dashboard.html' %}
+{% load static %}
+{% block css %}
+    <!-- <link rel="stylesheet" href="{% static 'css/asambleas.css' %}"> -->
+{% endblock %}
+
+{% block main %}
+    <h1 class="title-main">Usuarios</h1>
+    <a href="{% url 'create_users' %}">Crear Usuario</a>
+    <table>
+        <thead>
+            <tr>
+                <th>ID USUARIO</th>
+                <th>NOMBRE DE USUARIO</th>
+                <th>NOMBRES</th>
+                <th>APELLIDOS</th>
+                <th>EMAIL</th>
+                <th>SUPERUSUARIO</th>
+                <th>FECHA CREACIÓN</th>
+                <th>ESTADO</th>
+                <th>ACCIONES</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if users_list %}
+                {% for users in users_list %}
+                    <tr>
+                        <td>{{ users.id }}</td>
+                        <td>{{ users.username }}</td>
+                        <td>{{ users.first_name }}</td>
+                        <td>{{ users.last_name }}</td>
+                        <td>{{ users.email }}</td>
+                        <td>{{ users.is_superuser }}</td>
+                        <td>{{ users.date_joined }}</td>
+                        <td>{{ users.is_active }}</td>
+                        <td>
+                            <a href="{% url 'update_users' users.id %}">Editar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

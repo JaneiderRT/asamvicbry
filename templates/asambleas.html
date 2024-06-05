@@ -1,0 +1,48 @@
+{% extends 'base/dashboard.html' %}
+{% load static %}
+{% block css %}
+    <!-- <link rel="stylesheet" href="{% static 'css/asambleas.css' %}"> -->
+{% endblock %}
+
+{% block main %}
+    <h1 class="title-main">Asambleas</h1>
+    <a href="{% url 'create_asambleas' %}">Crear Asamblea</a>
+    <table>
+        <thead>
+            <tr>
+                <th>ID ASAMBLEA</th>
+                <th>NOMBRE</th>
+                <th>LUGAR ENCUENTRO</th>
+                <th>FECHA ENCUENTRO</th>
+                <th>HORA ENCUENTRO</th>
+                <th>CREADOR</th>
+                <th>ENCUESTA</th>
+                <th>FECHA CREACIÓN</th>
+                <th>FECHA ACTUALIZACIÓN</th>
+                <th>ESTADO</th>
+                <th>ACCIONES</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if assemblies_list %}
+                {% for assemblies in assemblies_list %}
+                    <tr>
+                        <td>{{ assemblies.id_asamblea }}</td>
+                        <td>{{ assemblies.nombre }}</td>
+                        <td>{{ assemblies.lugar_encuentro }}</td>
+                        <td>{{ assemblies.fecha_encuentro }}</td>
+                        <td>{{ assemblies.hora_encuentro }}</td>
+                        <td>{{ assemblies.usr_admin }}</td>
+                        <td>{{ assemblies.encuesta }}</td>
+                        <td>{{ assemblies.fecha_creacion }}</td>
+                        <td>{{ assemblies.fecha_actualizacion }}</td>
+                        <td>{{ assemblies.estado }}</td>
+                        <td>
+                            <a href="{% url 'update_asambleas' assemblies.id_asamblea %}">Editar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

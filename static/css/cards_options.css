@@ -1,0 +1,87 @@
+/*--------------------------------------------*/
+/*              Inicio Asambleas              */
+/*--------------------------------------------*/
+
+.main-content .container .options-main {
+    /* background-color: burlywood; */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    column-gap: 15px;
+    row-gap: 25px;
+}
+
+.card-option {
+    position: relative;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0px 0px 7px 2px #eaeaee;
+}
+
+.title-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 45%; */
+    column-gap: 7px;
+    border-start-start-radius: 15px;
+    border-start-end-radius: 15px;
+    padding: 35px 5px;
+}
+
+.gradient-one {
+    background: rgb(193,203,250);
+    background: linear-gradient(145deg, rgba(193,203,250,1) 35%, rgba(208,203,248,1) 50%, rgba(234,210,254,1) 100%);
+}
+
+.gradient-two {
+    background: rgb(250,222,203);
+    background: linear-gradient(145deg, rgba(250,222,203,1) 35%, rgba(239,223,225,1) 50%, rgba(217,217,246,1) 100%);
+}
+
+.gradient-three {
+    background: rgb(250,203,193);
+    background: linear-gradient(145deg, rgba(234,210,254,1) 35%, rgba(208,203,248,1) 50%, rgba(193,203,250,1) 100%);
+}
+
+.img-card {
+    padding: 5px;
+}
+
+.img-card img {
+    width: 28px;
+    height: 28px;
+}
+
+.title {
+    font-family: Signika-Medium, sans-serif;
+    font-size: 18px;
+}
+
+.body-card {
+    padding: 25px 10px;
+    font-family: Signika-Light, sans-serif;
+}
+
+.txt-body {
+    color: #6c757d;
+}
+
+.button-card {
+    background-color: #1997f0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 0;
+    padding: 25px 0px;
+    border-end-start-radius: 15px;
+    border-end-end-radius: 15px;
+    font-family: Signika-Medium, sans-serif;
+    font-size: 18px;
+    color: #bee1fa;
+}
+
+.button-card:hover {
+    background-color: #49abf3;
+    color: #c7eff1;
+}

@@ -1,0 +1,122 @@
+/*--------------------------------------------*/
+/*          Declaracion de fuentes            */
+/*--------------------------------------------*/
+@font-face {
+    font-family: Signika-Light;
+    src: url('../fonts/Signika/Signika-Light.ttf');
+}
+
+@font-face {
+    font-family: Signika-Medium;
+    src: url('../fonts/Signika/Signika-Medium.ttf');
+}
+
+@font-face {
+    font-family: Signika-Bold;
+    src: url('../fonts/Signika/Signika-Bold.ttf');
+}
+
+/*--------------------------------------------*/
+/*                Inicio de CSS               */
+/*--------------------------------------------*/
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+}
+
+body,
+html {
+    height: 100%;
+    /* scroll-behavior: smooth; */
+}
+
+/*--------------------------------------------*/
+/*                Inicio login                */
+/*--------------------------------------------*/
+.section-form {
+    background-color: #f8f8f8;
+    min-height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    background-color: #ffffff;
+    text-align: center;
+    padding: 50px 40px;
+    width:45%;
+    border: 0px solid #ffffff;
+    border-radius: 15px;
+    box-shadow: 0px 0px 15px 7px #eaeaee;
+    color: #154769;
+}
+
+.container h1 {
+    margin-bottom: 35px;
+    font-family: Signika-Bold, sans-serif;
+    font-size: 35px;
+    line-height: 15px;
+}
+
+.container form {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+    font-family: Signika-Light, sans-serif;
+    font-size: 17px;
+}
+
+.container form label {
+    text-align: start;
+}
+
+.container form input {
+    border: 2px solid #eeeeee;
+    font-family: Signika-Light, sans-serif;
+    font-size: 17px;
+    padding-left: 15px;
+    transition: border-bottom .13s ease-in-out;
+}
+
+.container form input, button {
+    border-radius: 5px;
+    height: 50px;
+}
+
+.container form input:focus-visible {
+    border-bottom: 4px solid #0c91ef;
+}
+
+.container form a {
+    text-decoration: none;
+    color: #4caef3;
+}
+
+.container form a:hover {
+    text-decoration: underline;
+}
+
+.container form button {
+    background-color: #1997f0;
+    font-family: Signika-Medium, sans-serif;
+    font-size: 17px;
+    color: #bee1fa;
+    cursor: pointer;
+}
+
+.container form button:hover {
+    background-color: #49abf3;
+    color: #c7eff1;
+}
+
+@media screen and (max-width: 430px) {
+    .container {
+        width: 90%;
+    }
+}

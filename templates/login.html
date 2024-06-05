@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASAMVICBRY | LOGIN</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+    <!--Login Form-->
+    <section class="section-form">
+        <div class="container">
+            <h1>Login</h1>
+            <p>{{ error }}</p>
+            <form method="post">
+                {% csrf_token %}
+                <label for="id_username">Usuario</label>
+                <input type="text" name="username" id="id_username">
+
+                <label for="id_password">Contraseña</label>
+                <input type="password" name="password" id="id_password">
+
+                <a href="">Olvidó la contraseña?</a>
+
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </section>
+</body>
+</html>

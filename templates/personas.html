@@ -1,0 +1,48 @@
+{% extends 'base/dashboard.html' %}
+{% load static %}
+{% block css %}
+    <!-- <link rel="stylesheet" href="{% static 'css/asambleas.css' %}"> -->
+{% endblock %}
+
+{% block main %}
+    <h1 class="title-main">Personas</h1>
+    <a href="{% url 'create_personas' %}">Crear Persona</a>
+    <table>
+        <thead>
+            <tr>
+                <th>NRO DOCUMENTO</th>
+                <th>TIPO DOCUMENTO</th>
+                <th>NOMBRE COMPLETO</th>
+                <th>EMAIL</th>
+                <th>NRO CONTACTO</th>
+                <th>ROL</th>
+                <th>USUARIO</th>
+                <th>NRO TORRE - APARTAMENTO</th>
+                <th>FECHA DE REGISTRO</th>
+                <th>FECHA DE ACTUALIZACIÓN</th>
+                <th>ACCIONES</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if persons_list %}
+                {% for persona in persons_list %}
+                    <tr>
+                        <td>{{ persona.nro_documento }}</td>
+                        <td>{{ persona.tipo_documento }}</td>
+                        <td>{{ persona.nombres }}  {{ persona.apellidos }}</td>
+                        <td>{{ persona.email }}</td>
+                        <td>{{ persona.nro_contacto }}</td>
+                        <td>{{ persona.tipo_persona.descripcion }}</td>
+                        <td>{{ persona.usuario.username }}</td>
+                        <td>{{ persona.apartamento.nro_torre }} - {{ persona.apartamento.nro_apartamento }}</td>
+                        <td>{{ persona.fecha_registro }}</td>
+                        <td>{{ persona.fecha_actualizacion }}</td>
+                        <td>
+                            <a href="{% url 'update_personas' persona.nro_documento %}">Editar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'base/dashboard.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/cards_options.css' %}">
+{% endblock %}
+
+{% block main %}
+    <h1 class="title-main">Home</h1>
+    <div class="options-main">
+        <div class="card-option">
+            <div class="title-card gradient-one">
+                <div class="img-card">
+                    <img src="{% static 'img/add_surveys.png' %}" alt="">
+                </div>
+                <h2 class="title">CREAR USUARIO</h2>
+                <!-- averiguar si se peude incluir la creación del usuario al formulario de
+                     creacion de una persona -->
+            </div>
+
+            <div class="body-card">
+                <p class="txt-body">
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perspiciatis recusandae, 
+                    repudiandae voluptas vitae non odit, atque dolore ducimus officiis veritatis molestias 
+                    ab minus illum facere tempora aliquam ratione quis. Impedit?
+                </p>
+            </div>
+
+            <a class="button-card" href="{% url 'create_users' %}">Crear</a>
+        </div>
+
+        <div class="card-option">
+            <div class="card-option">
+                <div class="title-card gradient-two">
+                    <div class="img-card">
+                        <img src="{% static 'img/edit_surveys.png' %}" alt="">
+                    </div>
+                    <h2 class="title">REGISTRAR ASISTENCIA</h2>
+                </div>
+    
+                <div class="body-card">
+                    <p class="txt-body">
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perspiciatis recusandae, 
+                        repudiandae voluptas vitae non odit, atque dolore ducimus officiis veritatis molestias 
+                        ab minus illum facere tempora aliquam ratione quis. Impedit?
+                    </p>
+                </div>
+    
+                <a class="button-card" href="">Registrar</a>
+            </div>
+        </div>
+
+        <div class="card-option">
+            <div class="card-option">
+                <div class="title-card gradient-three">
+                    <div class="img-card">
+                        <img src="{% static 'img/query_surveys.png' %}" alt="">
+                    </div>
+                    <h2 class="title">REGISTRAR APARTAMENTO</h2>
+                </div>
+    
+                <div class="body-card">
+                    <p class="txt-body">
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perspiciatis recusandae, 
+                        repudiandae voluptas vitae non odit, atque dolore ducimus officiis veritatis molestias 
+                        ab minus illum facere tempora aliquam ratione quis. Impedit?
+                    </p>
+                </div>
+    
+                <a class="button-card" href="{% url 'create_apartamentos' %}">Consultar</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
