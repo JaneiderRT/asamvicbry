@@ -147,7 +147,7 @@ class Rel_Asamblea_Asistente(models.Model):
     asistente = models.ForeignKey(Persona, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.id_asamblea} - {self.id_asistente}'
+        return f'{self.asamblea.id_asamblea} - {self.asistente.nro_documento}'
 
     class Meta:
         verbose_name_plural = 'Asistencia Asamblea'

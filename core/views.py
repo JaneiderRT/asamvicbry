@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.forms import inlineformset_factory
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
 from .forms import CreateApartamento, CreatePersona, CreateAsamblea, UpdateUsuario, UpdatePersona, UpdateAsamblea
-from .models import Persona, Asamblea, Estado_Asamblea
+from .models import Persona, Asamblea, Rel_Asamblea_Asistente, Estado_Asamblea
 
 # AUTHENTICATION VIEWS
 def index(request):
@@ -181,23 +182,40 @@ def update_personas(request, persona_id):
 @permission_required('core.change_asamblea', raise_exception=True)
 def update_asambleas(request, asamblea_id):
     asamblea = get_object_or_404(Asamblea, pk=asamblea_id)
+    AsambleaInlineFormSet = inlineformset_factory(Asamblea, Rel_Asamblea_Asistente, fields=['asistente'], can_delete=True, extra=1)
 
     if request.method == 'POST':
         try:
             form_asamblea = UpdateAsamblea(request.POST, instance=asamblea)
+            asamblea_formset = AsambleaInlineFormSet(request.POST, request.FILES, instance=asamblea)
             form_asamblea.save()
+
+            if int(request.POST['estado']) != 4: #Asamblea No Esta En Estado De Ejecucion
+                return render(request, 'update_asambleas.html', {
+                'asamblea': asamblea,
+                'form_asamblea': form_asamblea,
+                'asamblea_formset':asamblea_formset,
+                'error': 'La asamblea no se encuentra en ejecución.'
+            })
+            
+            if asamblea_formset.is_valid():
+                asamblea_formset.save()
+
             return redirect('asambleas')
         except:
             return render(request, 'update_asambleas.html', {
                 'asamblea': asamblea,
                 'form_asamblea': form_asamblea,
+                'asamblea_formset':asamblea_formset,
                 'error': 'No se pudo editar la información de la asamblea.'
             })
 
     form_asamblea = UpdateAsamblea(instance=asamblea)
+    asamblea_formset = AsambleaInlineFormSet(instance=asamblea)
     return render(request, 'update_asambleas.html', {
-        'asamblea': asamblea,
-        'form_asamblea': form_asamblea
+        'asamblea':asamblea,
+        'form_asamblea':form_asamblea,
+        'asamblea_formset':asamblea_formset
     })
 
 

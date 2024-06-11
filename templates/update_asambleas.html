@@ -10,6 +10,8 @@
     <form method="post">
         {% csrf_token %}
         {{ form_asamblea.as_p }}
+        <br>
+        {{ asamblea_formset.as_p }}
         <button>Guardar</button>
     </form>
 {% endblock %}
