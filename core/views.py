@@ -236,7 +236,7 @@ def personas(request):
 @login_required
 @permission_required('core.view_asamblea', raise_exception=True)
 def asambleas(request):
-    assemblies_list = Asamblea.objects.all()
+    assemblies_list = Asamblea.objects.exclude(estado=5)
     return render(request, 'asambleas.html', {'assemblies_list': assemblies_list})
 
 
