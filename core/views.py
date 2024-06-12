@@ -190,16 +190,17 @@ def update_asambleas(request, asamblea_id):
             asamblea_formset = AsambleaInlineFormSet(request.POST, request.FILES, instance=asamblea)
             form_asamblea.save()
 
-            if int(request.POST['estado']) != 4: #Asamblea No Esta En Estado De Ejecucion
-                return render(request, 'update_asambleas.html', {
-                'asamblea': asamblea,
-                'form_asamblea': form_asamblea,
-                'asamblea_formset':asamblea_formset,
-                'error': 'La asamblea no se encuentra en ejecución.'
-            })
+            if request.POST['rel_asamblea_asistente_set-0-asistente'] != '':
+                if (int(request.POST['estado']) != 4) and (int(request.POST['estado']) != 5): #Asamblea No Esta En Estado De Ejecucion O Terminada
+                    return render(request, 'update_asambleas.html', {
+                    'asamblea': asamblea,
+                    'form_asamblea': form_asamblea,
+                    'asamblea_formset':asamblea_formset,
+                    'error': 'La asamblea no se encuentra en ejecución.'
+                })
             
-            if asamblea_formset.is_valid():
-                asamblea_formset.save()
+                if asamblea_formset.is_valid():
+                    asamblea_formset.save()
 
             return redirect('asambleas')
         except:
