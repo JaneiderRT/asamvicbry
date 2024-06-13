@@ -79,7 +79,7 @@ class Opcion(models.Model):
     texto_opcion = models.CharField(max_length=100)
 
     def __str__(self):
-        return f'Pregunta: {self.id_pregunta} - Opcion: {self.id_opcion}'
+        return f'Pregunta: {self.pregunta.id_pregunta} - Opcion: {self.id_opcion}'
 
     class Meta:
         verbose_name_plural = 'Opcion'
@@ -97,14 +97,26 @@ class Respuesta(models.Model):
         verbose_name_plural = 'Respuesta'
 
 
+class Estado_Encuesta(models.Model):
+    id_estado   = models.BigAutoField(auto_created=True, primary_key=True)
+    abreviatura = models.CharField(max_length=5)
+    descripcion = models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.descripcion
+
+    class Meta:
+        verbose_name_plural = 'Estado Encuesta'
+
+
 class Encuesta(models.Model):
     id_encuesta    = models.BigAutoField(auto_created=True, primary_key=True)
     pregunta       = models.ManyToManyField(Pregunta, related_name='en_pregunta')
     fecha_creacion = models.DateTimeField(auto_now_add=True, verbose_name='Fecha Creacion Encuesta')
-    estado         = models.CharField(max_length=5)
+    estado         = models.ForeignKey(Estado_Encuesta, on_delete=models.CASCADE, related_name='encu_estado')
 
     def __str__(self):
-        return self.id_encuesta
+        return str(self.id_encuesta)
 
     class Meta:
         verbose_name_plural = 'Encuesta'
