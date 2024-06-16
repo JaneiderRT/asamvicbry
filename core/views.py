@@ -5,8 +5,25 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
-from .forms import CreateApartamento, CreatePersona, CreateAsamblea, UpdateUsuario, UpdatePersona, UpdateAsamblea
-from .models import Persona, Asamblea, Rel_Asamblea_Asistente, Estado_Asamblea
+from .forms import (
+    CreateApartamento,
+    CreatePersona,
+    CreateAsamblea,
+    CreateEncuesta,
+    UpdateUsuario,
+    UpdatePersona,
+    UpdateAsamblea
+)
+
+from .models import (
+    Persona,
+    Asamblea,
+    Encuesta,
+    Rel_Asamblea_Asistente,
+    Estado_Asamblea,
+    Pregunta,
+    Estado_Encuesta
+)
 
 # AUTHENTICATION VIEWS
 def index(request):
@@ -54,6 +71,17 @@ def create_apartamentos(request):
     return render(request, 'creation_forms.html', {
         'title': 'Creación Apartamento',
         'form': CreateApartamento
+    })
+
+
+def create_encuestas(request):
+    from datetime import date
+    encuesta = Encuesta.objects.get(pk=1)
+    p5 = Pregunta.objects.create(texto_pregunta='¿Está de acuerdo con que Steven sea parte del comite?')
+    encuesta.pregunta.add(p5, through_defaults={'fecha_creacion':date(2024, 6, 15)})
+    return render(request, 'creation_forms.html', {
+        'title': 'Creación Encuesta',
+        'form': CreateEncuesta,
     })
 
 
@@ -198,7 +226,7 @@ def update_asambleas(request, asamblea_id):
                     'asamblea_formset':asamblea_formset,
                     'error': 'La asamblea no se encuentra en ejecución.'
                 })
-            
+
                 if asamblea_formset.is_valid():
                     asamblea_formset.save()
 
@@ -240,17 +268,18 @@ def asambleas(request):
     return render(request, 'asambleas.html', {'assemblies_list': assemblies_list})
 
 
+@login_required
+@permission_required('core.view_encuesta', raise_exception=True)
+def encuestas(request):
+    surveys_list = Encuesta.objects.all()
+    return render(request, 'encuestas.html', {'surveys_list': surveys_list})
+
+
 # GENERAL VIEWS
 @login_required
 @permission_required(['core.add_users', 'core.add_rel_asamblea_asistente', 'core.add_apartamento'], raise_exception=True)
 def home(request):
     return render(request, 'home.html')
-
-
-@login_required
-#@permission_required('core.view_encuesta', raise_exception=True)
-def encuestas(request):
-    return render(request, 'encuestas.html')
 
 
 @login_required

@@ -1,71 +1,34 @@
 {% extends 'base/dashboard.html' %}
 {% load static %}
 {% block css %}
-    <link rel="stylesheet" href="{% static 'css/cards_options.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'css/cards_options.css' %}"> -->
 {% endblock %}
 
 {% block main %}
     <h1 class="title-main">Encuestas</h1>
-    <div class="options-main">
-        <div class="card-option">
-            <div class="title-card gradient-one">
-                <div class="img-card">
-                    <img src="{% static 'img/add_surveys.png' %}" alt="">
-                </div>
-                <h2 class="title">CREAR ENCUESTA</h2>
-            </div>
-
-            <div class="body-card">
-                <p class="txt-body">
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perspiciatis recusandae, 
-                    repudiandae voluptas vitae non odit, atque dolore ducimus officiis veritatis molestias 
-                    ab minus illum facere tempora aliquam ratione quis. Impedit?
-                </p>
-            </div>
-
-            <a class="button-card" href="">Crear</a>
-        </div>
-
-        <div class="card-option">
-            <div class="card-option">
-                <div class="title-card gradient-two">
-                    <div class="img-card">
-                        <img src="{% static 'img/edit_surveys.png' %}" alt="">
-                    </div>
-                    <h2 class="title">EDITAR ENCUESTA</h2>
-                </div>
-    
-                <div class="body-card">
-                    <p class="txt-body">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perspiciatis recusandae, 
-                        repudiandae voluptas vitae non odit, atque dolore ducimus officiis veritatis molestias 
-                        ab minus illum facere tempora aliquam ratione quis. Impedit?
-                    </p>
-                </div>
-    
-                <a class="button-card" href="">Editar</a>
-            </div>
-        </div>
-
-        <div class="card-option">
-            <div class="card-option">
-                <div class="title-card gradient-three">
-                    <div class="img-card">
-                        <img src="{% static 'img/query_surveys.png' %}" alt="">
-                    </div>
-                    <h2 class="title">CONSULTAR ENCUESTA</h2>
-                </div>
-    
-                <div class="body-card">
-                    <p class="txt-body">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perspiciatis recusandae, 
-                        repudiandae voluptas vitae non odit, atque dolore ducimus officiis veritatis molestias 
-                        ab minus illum facere tempora aliquam ratione quis. Impedit?
-                    </p>
-                </div>
-    
-                <a class="button-card" href="">Consultar</a>
-            </div>
-        </div>
-    </div>
+    <a href="{% url 'create_encuestas' %}">Crear Encuesta</a>
+    <table>
+        <thead>
+            <tr>
+                <th>ID ENCUESTA</th>
+                <th>FECHA ENCREACIÓN</th>
+                <th>ESTADO</th>
+                <th>ACCIONES</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if surveys_list %}
+                {% for surveys in surveys_list %}
+                    <tr>
+                        <td>{{ surveys.id_encuesta }}</td>
+                        <td>{{ surveys.fecha_creacion }}</td>
+                        <td>{{ surveys.estado }}</td>
+                        <td>
+                            <a href="#">Editar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+        </tbody>
+    </table>
 {% endblock %}

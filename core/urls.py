@@ -29,7 +29,7 @@ urlpatterns = [
 
     # POLLS PATHS
     path('encuestas/', views.encuestas, name='encuestas'),
-    #path('encuestas/create/', views.create_encuestas, name='create_encuestas'),
+    path('encuestas/create/', views.create_encuestas, name='create_encuestas'),
     #path('encuestas/update/<int:encuesta_id>', views.update_encuestas, name='update_encuestas'),
 
     # GENERAL PATHS

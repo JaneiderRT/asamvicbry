@@ -111,7 +111,7 @@ class Estado_Encuesta(models.Model):
 
 class Encuesta(models.Model):
     id_encuesta    = models.BigAutoField(auto_created=True, primary_key=True)
-    pregunta       = models.ManyToManyField(Pregunta, related_name='en_pregunta')
+    pregunta       = models.ManyToManyField(Pregunta, through='Rel_Encuesta_Pregunta', related_name='en_pregunta')
     fecha_creacion = models.DateTimeField(auto_now_add=True, verbose_name='Fecha Creacion Encuesta')
     estado         = models.ForeignKey(Estado_Encuesta, on_delete=models.CASCADE, related_name='encu_estado')
 
@@ -120,6 +120,17 @@ class Encuesta(models.Model):
 
     class Meta:
         verbose_name_plural = 'Encuesta'
+
+
+class Rel_Encuesta_Pregunta(models.Model):
+    encuesta = models.ForeignKey(Encuesta, on_delete=models.CASCADE)
+    pregunta = models.ForeignKey(Pregunta, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.encuesta.id_encuesta} - {self.pregunta.id_pregunta}'
+    
+    class Meta:
+        verbose_name_plural = 'Preguntas De Encuesta'
 
 
 class Estado_Asamblea(models.Model):

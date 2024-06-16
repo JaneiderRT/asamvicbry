@@ -1,16 +1,25 @@
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
-#from django.contrib.auth import get_user_model
 
-from .models import Tipo_Documento, Apartamento, Tipo_Persona, Persona, Pregunta, Opcion, Respuesta, Estado_Encuesta, Encuesta, Estado_Asamblea, Asamblea, Rel_Asamblea_Asistente
+from .models import (
+    Tipo_Documento, 
+    Apartamento, 
+    Tipo_Persona, 
+    Persona, 
+    Pregunta, 
+    Opcion, 
+    Respuesta, 
+    Estado_Encuesta, 
+    Encuesta, 
+    Estado_Asamblea, 
+    Asamblea, 
+    Rel_Asamblea_Asistente
+)
 
-# Register your models here.
-'''
-user = get_user_model()
+# Inlines
+class OpcionInline(admin.TabularInline):
+    model = Opcion
+    extra = 1
 
-class CustomUserAdmin(UserAdmin):
-    pass
-'''
 
 class RespuestaInline(admin.TabularInline):
     model = Respuesta
@@ -22,9 +31,16 @@ class RelAsambleaAsistenteInline(admin.TabularInline):
     extra = 1
 
 
+# Admin 
 class UsuarioAdmin(admin.ModelAdmin):
     inlines = [
         RespuestaInline,
+    ]
+
+
+class PreguntaAdmin(admin.ModelAdmin):
+    inlines = [
+        OpcionInline,
     ]
 
 
@@ -37,9 +53,7 @@ admin.site.register(Tipo_Documento)
 admin.site.register(Apartamento)
 admin.site.register(Tipo_Persona)
 admin.site.register(Persona)
-admin.site.register(Pregunta)
-admin.site.register(Opcion)
-#admin.site.register(Usuario, UsuarioAdmin)
+admin.site.register(Pregunta, PreguntaAdmin)
 #admin.site.register(Respuesta)
 admin.site.register(Estado_Encuesta)
 admin.site.register(Encuesta)

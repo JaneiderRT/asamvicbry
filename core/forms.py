@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 
-from .models import Apartamento, Persona, Asamblea
+from .models import Apartamento, Persona, Asamblea, Encuesta
 
 # DATA TYPE CLASS
 class TypeDateAsamblea(forms.DateInput):
@@ -23,6 +23,14 @@ class CreateApartamento(forms.ModelForm):
         fields = [
             'nro_apartamento',
             'nro_torre'
+        ]
+
+
+class CreateEncuesta(forms.ModelForm):
+    class Meta:
+        model = Encuesta
+        exclude = [
+            'id_encuesta',
         ]
 
 
