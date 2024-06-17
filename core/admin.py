@@ -12,7 +12,8 @@ from .models import (
     Encuesta, 
     Estado_Asamblea, 
     Asamblea, 
-    Rel_Asamblea_Asistente
+    Rel_Asamblea_Asistente,
+    Rel_Encuesta_Pregunta
 )
 
 # Inlines
@@ -28,6 +29,11 @@ class RespuestaInline(admin.TabularInline):
 
 class RelAsambleaAsistenteInline(admin.TabularInline):
     model = Rel_Asamblea_Asistente
+    extra = 1
+
+
+class RelEncuestaPreguntaInline(admin.TabularInline):
+    model = Rel_Encuesta_Pregunta
     extra = 1
 
 
@@ -49,6 +55,14 @@ class AsambleaAdmin(admin.ModelAdmin):
         RelAsambleaAsistenteInline,
     ]
 
+
+class EncuestaAdmin(admin.ModelAdmin):
+    inlines = [
+        RelEncuestaPreguntaInline,
+    ]
+
+
+# Registration On Admin Site
 admin.site.register(Tipo_Documento)
 admin.site.register(Apartamento)
 admin.site.register(Tipo_Persona)
@@ -56,7 +70,6 @@ admin.site.register(Persona)
 admin.site.register(Pregunta, PreguntaAdmin)
 #admin.site.register(Respuesta)
 admin.site.register(Estado_Encuesta)
-admin.site.register(Encuesta)
+admin.site.register(Encuesta, EncuestaAdmin)
 admin.site.register(Estado_Asamblea)
 admin.site.register(Asamblea, AsambleaAdmin)
-#admin.site.register(Rel_Asamblea_Asistente)

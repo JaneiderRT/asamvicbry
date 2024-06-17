@@ -49,7 +49,7 @@ class Persona(models.Model):
     usuario             = models.OneToOneField(User, on_delete=models.CASCADE, related_name='pe_usuario', null=True, blank=True, default=None)
     apartamento         = models.ManyToManyField(Apartamento, related_name='pe_apto', blank=True)
     fecha_registro      = models.DateTimeField(auto_now_add=True, verbose_name='Fecha Registro Persona')
-    fecha_actualizacion = models.DateTimeField(auto_now=True, verbose_name='Fecha Actualizacion Persona')
+    fecha_actualizacion = models.DateTimeField(auto_now=True, verbose_name='Fecha Actualización Persona')
 
     def __str__(self):
         if not self.usuario:
@@ -64,7 +64,7 @@ class Persona(models.Model):
 class Pregunta(models.Model):
     id_pregunta    = models.BigAutoField(auto_created=True, primary_key=True)
     texto_pregunta = models.TextField(max_length=255)
-    fecha_creacion = models.DateTimeField(auto_now_add=True, verbose_name='Fecha Creacion Pregunta')
+    fecha_creacion = models.DateTimeField(auto_now_add=True, verbose_name='Fecha Creación Pregunta')
 
     def __str__(self):
         return self.texto_pregunta
@@ -79,10 +79,10 @@ class Opcion(models.Model):
     texto_opcion = models.CharField(max_length=100)
 
     def __str__(self):
-        return f'Pregunta: {self.pregunta.id_pregunta} - Opcion: {self.id_opcion}'
+        return f'Pregunta: {self.pregunta.id_pregunta} - Opción: {self.id_opcion}'
 
     class Meta:
-        verbose_name_plural = 'Opcion'
+        verbose_name_plural = 'Opción'
 
 
 class Respuesta(models.Model):
@@ -100,7 +100,7 @@ class Respuesta(models.Model):
 class Estado_Encuesta(models.Model):
     id_estado   = models.BigAutoField(auto_created=True, primary_key=True)
     abreviatura = models.CharField(max_length=5)
-    descripcion = models.CharField(max_length=10)
+    descripcion = models.TextField(max_length=10)
 
     def __str__(self):
         return self.descripcion
@@ -111,12 +111,16 @@ class Estado_Encuesta(models.Model):
 
 class Encuesta(models.Model):
     id_encuesta    = models.BigAutoField(auto_created=True, primary_key=True)
+    titulo         = models.CharField(max_length=150)
+    descripcion    = models.TextField(max_length=255)
     pregunta       = models.ManyToManyField(Pregunta, through='Rel_Encuesta_Pregunta', related_name='en_pregunta')
-    fecha_creacion = models.DateTimeField(auto_now_add=True, verbose_name='Fecha Creacion Encuesta')
+    fecha_inicio   = models.DateField(verbose_name='Fecha Inicio Encuesta', null=True, blank=True, default=None)
+    fecha_fin      = models.DateField(verbose_name='Fecha Finalización Encuesta', null=True, blank=True, default=None)
+    fecha_creacion = models.DateTimeField(auto_now_add=True, verbose_name='Fecha Creación Encuesta')
     estado         = models.ForeignKey(Estado_Encuesta, on_delete=models.CASCADE, related_name='encu_estado')
 
     def __str__(self):
-        return str(self.id_encuesta)
+        return f'{self.id_encuesta} - {self.titulo}'
 
     class Meta:
         verbose_name_plural = 'Encuesta'
@@ -154,8 +158,8 @@ class Asamblea(models.Model):
     usr_admin           = models.ForeignKey(User, on_delete=models.CASCADE, related_name='asam_usr_admin')
     encuesta            = models.OneToOneField(Encuesta, on_delete=models.CASCADE, related_name='asam_encuesta', null=True, blank=True, default=None)
     asistente           = models.ManyToManyField(Persona, through='Rel_Asamblea_Asistente', related_name='asam_asistente')
-    fecha_creacion      = models.DateTimeField(auto_now_add=True, verbose_name='Fecha Creacion Asamblea')
-    fecha_actualizacion = models.DateTimeField(auto_now=True, verbose_name='Fecha actualizacion Asamblea')
+    fecha_creacion      = models.DateTimeField(auto_now_add=True, verbose_name='Fecha Creación Asamblea')
+    fecha_actualizacion = models.DateTimeField(auto_now=True, verbose_name='Fecha actualización Asamblea')
     estado              = models.ForeignKey(Estado_Asamblea, on_delete=models.CASCADE, related_name='asam_estado')
 
     def __str__(self):

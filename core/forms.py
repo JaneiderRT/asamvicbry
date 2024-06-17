@@ -31,7 +31,15 @@ class CreateEncuesta(forms.ModelForm):
         model = Encuesta
         exclude = [
             'id_encuesta',
+            'pregunta',
+            'fecha_inicio',
+            'fecha_fin',
+            'estado',
         ]
+        widgets = {
+            'fecha_inicio':TypeDateAsamblea,
+            'fecha_fin':TypeDateAsamblea
+        }
 
 
 class CreatePersona(forms.ModelForm):
@@ -70,9 +78,9 @@ class UpdateUsuario(forms.ModelForm):
     class Meta:
         model = User
         fields = [
-            'first_name',
-            'last_name',
-            'email',
+            #'first_name',
+            #'last_name',
+            #'email',
             'is_active'
         ]
 
@@ -82,9 +90,7 @@ class UpdatePersona(forms.ModelForm):
         model = Persona
         exclude = [
             'nro_documento',
-            'tipo_persona',
-            'usuario',
-            'apartamento'
+            'tipo_persona'
         ]
 
 
@@ -99,4 +105,17 @@ class UpdateAsamblea(forms.ModelForm):
         widgets = {
             'fecha_encuentro':TypeDateAsamblea,
             'hora_encuentro':TypeTimeAsamblea
+        }
+
+
+class UpdateEncuesta(forms.ModelForm):
+    class Meta:
+        model = Encuesta
+        exclude = [
+            'id_encuesta',
+            'pregunta'
+        ]
+        widgets = {
+            'fecha_inicio':TypeDateAsamblea,
+            'fecha_fin':TypeDateAsamblea
         }

@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
+from .admin import EncuestaAdmin
+
 from .forms import (
     CreateApartamento,
     CreatePersona,
@@ -12,17 +14,18 @@ from .forms import (
     CreateEncuesta,
     UpdateUsuario,
     UpdatePersona,
-    UpdateAsamblea
+    UpdateAsamblea,
+    UpdateEncuesta
 )
 
 from .models import (
     Persona,
     Asamblea,
     Encuesta,
-    Rel_Asamblea_Asistente,
     Estado_Asamblea,
-    Pregunta,
-    Estado_Encuesta
+    Estado_Encuesta,
+    Rel_Asamblea_Asistente,
+    Rel_Encuesta_Pregunta,
 )
 
 # AUTHENTICATION VIEWS
@@ -75,13 +78,24 @@ def create_apartamentos(request):
 
 
 def create_encuestas(request):
-    from datetime import date
-    encuesta = Encuesta.objects.get(pk=1)
-    p5 = Pregunta.objects.create(texto_pregunta='¿Está de acuerdo con que Steven sea parte del comite?')
-    encuesta.pregunta.add(p5, through_defaults={'fecha_creacion':date(2024, 6, 15)})
+    if request.method == 'POST':
+        form_encuesta = CreateEncuesta(request.POST)
+
+        if not form_encuesta.is_valid():
+            return render(request, 'creation_forms.html', {
+                'title': 'Creación Encuesta',
+                'form': CreateEncuesta,
+                'error': 'Inconveniente al crear la encuesta.'
+            })
+        
+        new_encuesta = form_encuesta.save(commit=False)
+        new_encuesta.estado = Estado_Encuesta.objects.get(abreviatura='INACT')
+        new_encuesta.save()
+        return redirect('encuestas')
+
     return render(request, 'creation_forms.html', {
         'title': 'Creación Encuesta',
-        'form': CreateEncuesta,
+        'form': CreateEncuesta
     })
 
 
@@ -160,6 +174,37 @@ def create_asambleas(request):
 
 
 # UPDATE VIEWS
+def update_encuestas(request, encuesta_id):
+    encuesta = get_object_or_404(Encuesta, pk=encuesta_id)
+    EncuestaInlineFormSet = inlineformset_factory(Encuesta, Rel_Encuesta_Pregunta, fields=['pregunta'], can_delete=True, extra=1)
+
+    if request.method == 'POST':
+        try:
+            form_encuesta = UpdateEncuesta(request.POST, instance=encuesta)
+            encuesta_formset = EncuestaInlineFormSet(request.POST, request.FILES, instance=encuesta)
+            form_encuesta.save()
+
+            if encuesta_formset.is_valid():
+                encuesta_formset.save()
+
+            return redirect('encuestas')
+        except:
+            return render(request, 'update_encuestas.html', {
+                'encuesta': encuesta,
+                'form_encuesta': form_encuesta,
+                'encuesta_formset': encuesta_formset,
+                'error': 'No se pudo editar la información de la encuesta.'
+            })
+    
+    form_encuesta = UpdateEncuesta(instance=encuesta)
+    encuesta_formset = EncuestaInlineFormSet(instance=encuesta)
+    return render(request, 'update_encuestas.html', {
+        'encuesta': encuesta,
+        'form_encuesta': form_encuesta,
+        'encuesta_formset': encuesta_formset
+    })
+
+
 def update_users(request, user_id):
     usuario = get_object_or_404(User, pk=user_id)
 
@@ -257,14 +302,14 @@ def usuarios(request):
 @login_required
 @permission_required('core.view_persona', raise_exception=True)
 def personas(request):
-    persons_list = Persona.objects.exclude(tipo_persona=1)
+    persons_list = Persona.objects.exclude(tipo_persona=1) # Administrador
     return render(request, 'personas.html', {'persons_list': persons_list})
 
 
 @login_required
 @permission_required('core.view_asamblea', raise_exception=True)
 def asambleas(request):
-    assemblies_list = Asamblea.objects.exclude(estado=5)
+    assemblies_list = Asamblea.objects.exclude(estado=5) # Terminada
     return render(request, 'asambleas.html', {'assemblies_list': assemblies_list})
 
 

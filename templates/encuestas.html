@@ -24,7 +24,7 @@
                         <td>{{ surveys.fecha_creacion }}</td>
                         <td>{{ surveys.estado }}</td>
                         <td>
-                            <a href="#">Editar</a>
+                            <a href="{% url 'update_encuestas' surveys.id_encuesta %}">Editar</a>
                         </td>
                     </tr>
                 {% endfor %}
