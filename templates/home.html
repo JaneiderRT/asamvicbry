@@ -10,9 +10,9 @@
         <div class="card-option">
             <div class="title-card gradient-one">
                 <div class="img-card">
-                    <img src="{% static 'img/add_surveys.png' %}" alt="">
+                    <img src="{% static 'img/identification_type.png' %}" alt="">
                 </div>
-                <h2 class="title">CREAR USUARIO</h2>
+                <h2 class="title">REGISTRAR TIPO DOCUMENTOS</h2>
                 <!-- averiguar si se peude incluir la creación del usuario al formulario de
                      creacion de una persona -->
             </div>
@@ -25,16 +25,16 @@
                 </p>
             </div>
 
-            <a class="button-card" href="{% url 'create_users' %}">Crear</a>
+            <a class="button-card" href="#">Registrar</a>
         </div>
 
-        <div class="card-option">
+        <!-- <div class="card-option"> -->
             <div class="card-option">
                 <div class="title-card gradient-two">
                     <div class="img-card">
-                        <img src="{% static 'img/edit_surveys.png' %}" alt="">
+                        <img src="{% static 'img/person_type.png' %}" alt="">
                     </div>
-                    <h2 class="title">REGISTRAR ASISTENCIA</h2>
+                    <h2 class="title">REGISTRAR ROLES</h2>
                 </div>
     
                 <div class="body-card">
@@ -47,13 +47,13 @@
     
                 <a class="button-card" href="">Registrar</a>
             </div>
-        </div>
+        <!-- </div> -->
 
-        <div class="card-option">
+        <!-- <div class="card-option"> -->
             <div class="card-option">
                 <div class="title-card gradient-three">
                     <div class="img-card">
-                        <img src="{% static 'img/query_surveys.png' %}" alt="">
+                        <img src="{% static 'img/apartment.png' %}" alt="">
                     </div>
                     <h2 class="title">REGISTRAR APARTAMENTO</h2>
                 </div>
@@ -66,8 +66,50 @@
                     </p>
                 </div>
     
-                <a class="button-card" href="{% url 'create_apartamentos' %}">Consultar</a>
+                <a class="button-card" href="{% url 'create_apartamentos' %}">Registrar</a>
             </div>
-        </div>
+        <!-- </div> -->
+
+        <!-- <div class="card-option"> -->
+            <div class="card-option">
+                <div class="title-card gradient-two">
+                    <div class="img-card">
+                        <img src="{% static 'img/query_surveys.png' %}" alt="">
+                    </div>
+                    <h2 class="title">REGISTRAR ESTADOS DE ASAMBLEA</h2>
+                </div>
+    
+                <div class="body-card">
+                    <p class="txt-body">
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perspiciatis recusandae, 
+                        repudiandae voluptas vitae non odit, atque dolore ducimus officiis veritatis molestias 
+                        ab minus illum facere tempora aliquam ratione quis. Impedit?
+                    </p>
+                </div>
+    
+                <a class="button-card" href="">Registrar</a>
+            </div>
+        <!-- </div> -->
+
+        <!-- <div class="card-option"> -->
+            <div class="card-option">
+                <div class="title-card gradient-three">
+                    <div class="img-card">
+                        <img src="{% static 'img/edit_surveys.png' %}" alt="">
+                    </div>
+                    <h2 class="title">REGISTRAR ESTADOS DE ENCUESTA</h2>
+                </div>
+    
+                <div class="body-card">
+                    <p class="txt-body">
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perspiciatis recusandae, 
+                        repudiandae voluptas vitae non odit, atque dolore ducimus officiis veritatis molestias 
+                        ab minus illum facere tempora aliquam ratione quis. Impedit?
+                    </p>
+                </div>
+    
+                <a class="button-card" href="">Registrar</a>
+            </div>
+        <!-- </div> -->
     </div>
 {% endblock %}
