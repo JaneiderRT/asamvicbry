@@ -11,6 +11,10 @@
         <thead>
             <tr>
                 <th>ID ENCUESTA</th>
+                <th>TITULO</th>
+                <th>DESCRIPCIÓN</th>
+                <th>FECHA INICIO</th>
+                <th>FECHA FINALIZACIÓN</th>
                 <th>FECHA ENCREACIÓN</th>
                 <th>ESTADO</th>
                 <th>ACCIONES</th>
@@ -21,6 +25,10 @@
                 {% for surveys in surveys_list %}
                     <tr>
                         <td>{{ surveys.id_encuesta }}</td>
+                        <td>{{ surveys.titulo }}</td>
+                        <td>{{ surveys.descripcion }}</td>
+                        <td>{{ surveys.fecha_inicio }}</td>
+                        <td>{{ surveys.fecha_fin }}</td>
                         <td>{{ surveys.fecha_creacion }}</td>
                         <td>{{ surveys.estado }}</td>
                         <td>

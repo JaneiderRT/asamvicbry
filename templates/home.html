@@ -13,103 +13,91 @@
                     <img src="{% static 'img/identification_type.png' %}" alt="">
                 </div>
                 <h2 class="title">REGISTRAR TIPO DOCUMENTOS</h2>
-                <!-- averiguar si se peude incluir la creación del usuario al formulario de
-                     creacion de una persona -->
             </div>
 
             <div class="body-card">
                 <p class="txt-body">
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perspiciatis recusandae, 
-                    repudiandae voluptas vitae non odit, atque dolore ducimus officiis veritatis molestias 
-                    ab minus illum facere tempora aliquam ratione quis. Impedit?
+                    Crea y administra los tipos de documentos de identidad válidos para el registro de personas en el condominio.
+                    ¡Esencial para llevar un control organizado!
                 </p>
             </div>
 
-            <a class="button-card" href="#">Registrar</a>
+            <a class="button-card" href="#">Parametrizar</a>
         </div>
 
-        <!-- <div class="card-option"> -->
-            <div class="card-option">
-                <div class="title-card gradient-two">
-                    <div class="img-card">
-                        <img src="{% static 'img/person_type.png' %}" alt="">
-                    </div>
-                    <h2 class="title">REGISTRAR ROLES</h2>
+        <div class="card-option">
+            <div class="title-card gradient-two">
+                <div class="img-card">
+                    <img src="{% static 'img/person_type.png' %}" alt="">
                 </div>
-    
-                <div class="body-card">
-                    <p class="txt-body">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perspiciatis recusandae, 
-                        repudiandae voluptas vitae non odit, atque dolore ducimus officiis veritatis molestias 
-                        ab minus illum facere tempora aliquam ratione quis. Impedit?
-                    </p>
-                </div>
-    
-                <a class="button-card" href="">Registrar</a>
+                <h2 class="title">REGISTRAR ROLES</h2>
             </div>
-        <!-- </div> -->
 
-        <!-- <div class="card-option"> -->
-            <div class="card-option">
-                <div class="title-card gradient-three">
-                    <div class="img-card">
-                        <img src="{% static 'img/apartment.png' %}" alt="">
-                    </div>
-                    <h2 class="title">REGISTRAR APARTAMENTO</h2>
-                </div>
-    
-                <div class="body-card">
-                    <p class="txt-body">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perspiciatis recusandae, 
-                        repudiandae voluptas vitae non odit, atque dolore ducimus officiis veritatis molestias 
-                        ab minus illum facere tempora aliquam ratione quis. Impedit?
-                    </p>
-                </div>
-    
-                <a class="button-card" href="{% url 'create_apartamentos' %}">Registrar</a>
+            <div class="body-card">
+                <p class="txt-body">
+                    Crea y administra los diferentes roles que pueden existir en el condominio para el registro de personas.
+                    ¡Esencial para asignar responsabilidades y mantener un control organizado!
+                </p>
             </div>
-        <!-- </div> -->
 
-        <!-- <div class="card-option"> -->
-            <div class="card-option">
-                <div class="title-card gradient-two">
-                    <div class="img-card">
-                        <img src="{% static 'img/query_surveys.png' %}" alt="">
-                    </div>
-                    <h2 class="title">REGISTRAR ESTADOS DE ASAMBLEA</h2>
-                </div>
-    
-                <div class="body-card">
-                    <p class="txt-body">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perspiciatis recusandae, 
-                        repudiandae voluptas vitae non odit, atque dolore ducimus officiis veritatis molestias 
-                        ab minus illum facere tempora aliquam ratione quis. Impedit?
-                    </p>
-                </div>
-    
-                <a class="button-card" href="">Registrar</a>
-            </div>
-        <!-- </div> -->
+            <a class="button-card" href="">Parametrizar</a>
+        </div>
 
-        <!-- <div class="card-option"> -->
-            <div class="card-option">
-                <div class="title-card gradient-three">
-                    <div class="img-card">
-                        <img src="{% static 'img/edit_surveys.png' %}" alt="">
-                    </div>
-                    <h2 class="title">REGISTRAR ESTADOS DE ENCUESTA</h2>
+
+        <div class="card-option">
+            <div class="title-card gradient-three">
+                <div class="img-card">
+                    <img src="{% static 'img/apartment.png' %}" alt="">
                 </div>
-    
-                <div class="body-card">
-                    <p class="txt-body">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perspiciatis recusandae, 
-                        repudiandae voluptas vitae non odit, atque dolore ducimus officiis veritatis molestias 
-                        ab minus illum facere tempora aliquam ratione quis. Impedit?
-                    </p>
-                </div>
-    
-                <a class="button-card" href="">Registrar</a>
+                <h2 class="title">REGISTRAR APARTAMENTO</h2>
             </div>
-        <!-- </div> -->
+
+            <div class="body-card">
+                <p class="txt-body">
+                    Con esta opción puedes crear y editar los registros de todos los apartamentos del condominio.
+                    Mantén una base de datos precisa y actualizada para una mejor organización y comunicación.
+                </p>
+            </div>
+
+            <a class="button-card" href="{% url 'create_apartamentos' %}">Parametrizar</a>
+        </div>
+
+
+        <div class="card-option">
+            <div class="title-card gradient-two">
+                <div class="img-card">
+                    <img src="{% static 'img/query_surveys.png' %}" alt="">
+                </div>
+                <h2 class="title">REGISTRAR ESTADOS DE ASAMBLEA</h2>
+            </div>
+
+            <div class="body-card">
+                <p class="txt-body">
+                    Toma el control de los estados de las asambleas: crea, edita y consulta.
+                    ¡Comienza a usar esta opción ahora y toma el control de los estados de las asambleas de tu condominio!
+                </p>
+            </div>
+
+            <a class="button-card" href="">Parametrizar</a>
+        </div>
+
+
+        <div class="card-option">
+            <div class="title-card gradient-three">
+                <div class="img-card">
+                    <img src="{% static 'img/edit_surveys.png' %}" alt="">
+                </div>
+                <h2 class="title">REGISTRAR ESTADOS DE ENCUESTA</h2>
+            </div>
+
+            <div class="body-card">
+                <p class="txt-body">
+                    Toma el control de los estados de las encuestas: crea, edita y consulta.
+                    ¡Comienza a usar esta opción ahora y toma el control de los estados de las encuestas de tu condominio!
+                </p>
+            </div>
+
+            <a class="button-card" href="">Parametrizar</a>
+        </div>
     </div>
 {% endblock %}
