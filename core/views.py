@@ -26,6 +26,7 @@ from .models import (
     Estado_Encuesta,
     Rel_Asamblea_Asistente,
     Rel_Encuesta_Pregunta,
+    Apartamento
 )
 
 # AUTHENTICATION VIEWS

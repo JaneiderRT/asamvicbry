@@ -19,7 +19,7 @@ urlpatterns = [
 
     # APARTAMENTS PATHS
     #path('apartamentos/', views.apartamentos, name='apartamentos'),
-    path('apartamentos/create/', views.create_apartamentos, name='create_apartamentos'),
+    path('home/apartamentos/create/', views.create_apartamentos, name='create_apartamentos'),
     #path('apartamentos/update/<int:apartamentos_id>', views.update_apartamentos, name='update_apartamentos'),
 
     #ASAMBLEAS PATHS

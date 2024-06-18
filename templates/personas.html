@@ -34,7 +34,11 @@
                         <td>{{ persona.nro_contacto }}</td>
                         <td>{{ persona.tipo_persona.descripcion }}</td>
                         <td>{{ persona.usuario.username }}</td>
-                        <td>{{ persona.apartamento.nro_torre }} - {{ persona.apartamento.nro_apartamento }}</td>
+                        <td>
+                            {%  for apartamento in persona.apartamento.all %}
+                                {{ apartamento }}<br>
+                            {% endfor %}
+                        </td>
                         <td>{{ persona.fecha_registro }}</td>
                         <td>{{ persona.fecha_actualizacion }}</td>
                         <td>
