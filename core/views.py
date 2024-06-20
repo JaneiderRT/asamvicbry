@@ -12,6 +12,7 @@ from .forms import (
     CreatePersona,
     CreateAsamblea,
     CreateEncuesta,
+    CreatePregunta,
     UpdateUsuario,
     UpdatePersona,
     UpdateAsamblea,
@@ -22,11 +23,12 @@ from .models import (
     Persona,
     Asamblea,
     Encuesta,
+    Pregunta,
+    Opcion,
     Estado_Asamblea,
     Estado_Encuesta,
     Rel_Asamblea_Asistente,
-    Rel_Encuesta_Pregunta,
-    Apartamento
+    Rel_Encuesta_Pregunta
 )
 
 # AUTHENTICATION VIEWS
@@ -97,6 +99,26 @@ def create_encuestas(request):
     return render(request, 'creation_forms.html', {
         'title': 'Creación Encuesta',
         'form': CreateEncuesta
+    })
+
+
+def create_preguntas(request):
+    if request.method == 'POST':
+        form_pregunta = CreatePregunta(request.POST)
+
+        if not form_pregunta.is_valid():
+            return render(request, 'creation_forms.html', {
+                'title': 'Creación Preguntas',
+                'form': CreatePregunta,
+                'error': 'Inconveniente al crear la pregunta.'
+            })
+        
+        form_pregunta.save()
+        return redirect('preguntas')
+
+    return render(request, 'creation_forms.html', {
+        'title': 'Creación Preguntas',
+        'form': CreatePregunta
     })
 
 
@@ -319,6 +341,11 @@ def asambleas(request):
 def encuestas(request):
     surveys_list = Encuesta.objects.all()
     return render(request, 'encuestas.html', {'surveys_list': surveys_list})
+
+
+def preguntas(request):
+    questions_list = Pregunta.objects.all()
+    return render(request, 'preguntas.html', {'questions_list':questions_list})
 
 
 # GENERAL VIEWS

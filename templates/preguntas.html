@@ -1,0 +1,36 @@
+{% extends 'base/dashboard.html' %}
+{% load static %}
+{% block css %}
+    <!-- <link rel="stylesheet" href="{% static 'css/cards_options.css' %}"> -->
+{% endblock %}
+
+{% block main %}
+    <h1 class="title-main">Encuestas > Preguntas</h1>
+    <div>
+        <a href="{% url 'create_preguntas' %}">Crear Pregunta</a>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>ID PREGUNTA</th>
+                <th>PREGUNTA</th>
+                <th>FECHA ENCREACIÓN</th>
+                <th>ACCIONES</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if questions_list %}
+                {% for question in questions_list %}
+                    <tr>
+                        <td>{{ question.id_pregunta }}</td>
+                        <td>{{ question.texto_pregunta }}</td>
+                        <td>{{ question.fecha_creacion }}</td>
+                        <td>
+                            <a href="#">Editar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

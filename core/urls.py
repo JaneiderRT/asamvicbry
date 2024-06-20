@@ -32,6 +32,10 @@ urlpatterns = [
     path('encuestas/create/', views.create_encuestas, name='create_encuestas'),
     path('encuestas/update/<int:encuesta_id>', views.update_encuestas, name='update_encuestas'),
 
+    # QUESTIONS PATHS
+    path('encuestas/preguntas/', views.preguntas, name='preguntas'),
+    path('encuestas/preguntas/create/', views.create_preguntas, name='create_preguntas'),
+
     # GENERAL PATHS
     path('home/', views.home, name='home'),
     path('usuarios-normales/', views.usrs_normales, name='usrs_normales'),

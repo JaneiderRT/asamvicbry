@@ -6,7 +6,10 @@
 
 {% block main %}
     <h1 class="title-main">Encuestas</h1>
-    <a href="{% url 'create_encuestas' %}">Crear Encuesta</a>
+    <div>
+        <a href="{% url 'create_encuestas' %}">Crear Encuesta</a>
+        <a href="{% url 'preguntas' %}">Ver Preguntas</a>
+    </div>
     <table>
         <thead>
             <tr>
