@@ -127,3 +127,11 @@ class UpdateEncuesta(forms.ModelForm):
             'fecha_inicio':TypeDateAsamblea,
             'fecha_fin':TypeDateAsamblea
         }
+
+
+class UpdatePregunta(forms.ModelForm):
+    class Meta:
+        model = Pregunta
+        fields = [
+            'texto_pregunta'
+        ]

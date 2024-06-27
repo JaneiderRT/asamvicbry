@@ -1,0 +1,17 @@
+{% extends 'base/dashboard.html' %}
+{% load static %}
+{% block css %}
+    <!-- <link rel="stylesheet" href="{% static 'css/asambleas.css' %}"> -->
+{% endblock %}
+
+{% block main %}
+    <h1 class="title-main">Encuestas > Preguntas > Edit > {{ pregunta.id_pregunta }}</h1>
+    {{ error }}
+    <form method="post">
+        {% csrf_token %}
+        {{ form_pregunta.as_p }}
+        <br>
+        {{ pregunta_formset.as_p }}
+        <button>Guardar</button>
+    </form>
+{% endblock %}

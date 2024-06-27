@@ -5,8 +5,6 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
-from .admin import EncuestaAdmin
-
 from .forms import (
     CreateApartamento,
     CreatePersona,
@@ -16,7 +14,8 @@ from .forms import (
     UpdateUsuario,
     UpdatePersona,
     UpdateAsamblea,
-    UpdateEncuesta
+    UpdateEncuesta,
+    UpdatePregunta
 )
 
 from .models import (
@@ -225,6 +224,33 @@ def update_encuestas(request, encuesta_id):
         'encuesta': encuesta,
         'form_encuesta': form_encuesta,
         'encuesta_formset': encuesta_formset
+    })
+
+
+def update_preguntas(request, pregunta_id):
+    pregunta = get_object_or_404(Pregunta, pk=pregunta_id)
+    PreguntaInlineFormSet = inlineformset_factory(Pregunta, Opcion, fields=['texto_opcion'], can_delete=True, extra=1)
+
+    if request.method == 'POST':
+        form_pregunta = UpdatePregunta(request.POST, instance=pregunta)
+        pregunta_formset = PreguntaInlineFormSet(request.POST, request.FILES, instance=pregunta)
+
+        if (not form_pregunta.is_valid()) or (not pregunta_formset.is_valid()):
+            return render(request, 'update_preguntas.html', {
+                'pregunta': pregunta,
+                'form_pregunta': form_pregunta,
+                'pregunta_formset': pregunta_formset,
+                'error': 'No se pudo editar la información de la pregunta.'
+            })
+        
+        form_pregunta.save()
+        pregunta_formset.save()
+        return redirect('preguntas')
+
+    return render(request, 'update_preguntas.html', {
+        'pregunta': pregunta,
+        'form_pregunta': UpdatePregunta(instance=pregunta),
+        'pregunta_formset': PreguntaInlineFormSet(instance=pregunta)
     })
 
 
