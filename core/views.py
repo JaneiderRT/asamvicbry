@@ -6,11 +6,15 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
 from .forms import (
-    CreateApartamento,
+    FormApartamento,
     CreatePersona,
     CreateAsamblea,
     CreateEncuesta,
     CreatePregunta,
+    CreateTipoDocumento,
+    CreateTipoPersona,
+    CreateEstadoAsamblea,
+    CreateEstadoEncuesta,
     UpdateUsuario,
     UpdatePersona,
     UpdateAsamblea,
@@ -24,6 +28,7 @@ from .models import (
     Encuesta,
     Pregunta,
     Opcion,
+    Apartamento,
     Estado_Asamblea,
     Estado_Encuesta,
     Rel_Asamblea_Asistente,
@@ -61,12 +66,12 @@ def singout(request):
 @permission_required('core.add_apartamento', raise_exception=True)
 def create_apartamentos(request):
     if request.method == 'POST':
-        form_apartamento = CreateApartamento(request.POST)
+        form_apartamento = FormApartamento(request.POST)
 
         if not form_apartamento.is_valid():
             return render(request, 'creation_forms.html', {
                 'title': 'Creación De Apartamentos',
-                'form': CreateApartamento,
+                'form': FormApartamento,
                 'error': 'Inconveniente al crear el apartamento.'
             })
 
@@ -75,7 +80,7 @@ def create_apartamentos(request):
 
     return render(request, 'creation_forms.html', {
         'title': 'Creación Apartamento',
-        'form': CreateApartamento
+        'form': FormApartamento
     })
 
 
@@ -192,6 +197,26 @@ def create_asambleas(request):
     return render(request, 'creation_forms.html', {
         'title': 'Creación De Asambleas',
         'form': CreateAsamblea
+    })
+
+
+def create_documentos(request):
+    if request.method == 'POST':
+        form_documentos = CreateTipoDocumento(request.POST)
+
+        if not form_documentos.is_valid():
+            return render(request, 'creation_forms.html', {
+                'title': 'Creación De Tipos De Documento',
+                'form': CreateTipoDocumento,
+                'error': 'Inconveniente al crear el tipo de documento.'
+            })
+        
+        form_documentos.save()
+        redirect('create_documentos')
+
+    return render(request, 'creation_forms.html', {
+        'title': 'Creación De Tipos De Documento',
+        'form': CreateTipoDocumento
     })
 
 
@@ -342,6 +367,27 @@ def update_asambleas(request, asamblea_id):
     })
 
 
+def update_apartamentos(request, apartamento_id):
+    apartamento = get_object_or_404(Apartamento, pk=apartamento_id)
+
+    if request.method ==  'POST':
+        try:
+            form_apartamento = FormApartamento(request.POST, instance=apartamento)
+            form_apartamento.save()
+            return redirect('apartamentos')
+        except:
+            return render(request, 'update_apartamentos.html', {
+                'apartamento': apartamento,
+                'form_apartamento': form_apartamento,
+                'error': 'No se pudo editar la información del apartamento.'
+            })
+
+    return render(request, 'update_apartamentos.html', {
+        'apartamento': apartamento,
+        'form_apartamento': FormApartamento(instance=apartamento)
+    })
+
+
 # CONSULTATION VIEWS
 def usuarios(request):
     users_list = User.objects.exclude(username=request.user)
@@ -371,7 +417,12 @@ def encuestas(request):
 
 def preguntas(request):
     questions_list = Pregunta.objects.all()
-    return render(request, 'preguntas.html', {'questions_list':questions_list})
+    return render(request, 'preguntas.html', {'questions_list': questions_list})
+
+
+def apartamentos(request):
+    apartaments_list = Apartamento.objects.all()
+    return render(request, 'apartamentos.html', {'apartaments_list': apartaments_list})
 
 
 # GENERAL VIEWS

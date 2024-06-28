@@ -1,0 +1,34 @@
+{% extends 'base/dashboard.html' %}
+{% load static %}
+{% block css %}
+<!-- <link rel="stylesheet" href="{% static 'css/asambleas.css' %}"> -->
+{% endblock %}
+
+{% block main %}
+<h1 class="title-main">Apartamentos</h1>
+<a href="{% url 'create_apartamentos' %}">Crear Apartamento</a>
+<table>
+    <thead>
+        <tr>
+            <th>ID APARTAMENTO</th>
+            <th>NRO TORRE</th>
+            <th>NRO APARTAMENTO</th>
+            <th>ACCIONES</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if apartaments_list %}
+        {% for apartamento in apartaments_list %}
+        <tr>
+            <td>{{ apartamento.id_apartamento }}</td>
+            <td>{{ apartamento.nro_torre }}</td>
+            <td>{{ apartamento.nro_apartamento }}</td>
+            <td>
+                <a href="{% url 'update_apartamentos' apartamento.id_apartamento %}">Editar</a>
+            </td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+    </tbody>
+</table>
+{% endblock %}

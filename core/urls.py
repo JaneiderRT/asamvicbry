@@ -18,9 +18,12 @@ urlpatterns = [
     path('personas/update/<int:persona_id>/', views.update_personas, name='update_personas'),
 
     # APARTAMENTS PATHS
-    #path('apartamentos/', views.apartamentos, name='apartamentos'),
+    path('home/apartamentos/', views.apartamentos, name='apartamentos'),
     path('home/apartamentos/create/', views.create_apartamentos, name='create_apartamentos'),
-    #path('apartamentos/update/<int:apartamentos_id>', views.update_apartamentos, name='update_apartamentos'),
+    path('apartamentos/update/<int:apartamento_id>', views.update_apartamentos, name='update_apartamentos'),
+
+    # DOCUMENTS TYPE PATHS
+    path('home/tipo_documentos/create/', views.create_documentos, name='create_documentos'),
 
     #ASAMBLEAS PATHS
     path('asambleas/', views.asambleas, name='asambleas'),

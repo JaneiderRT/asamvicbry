@@ -25,6 +25,7 @@ class Apartamento(models.Model):
 
     class Meta:
         verbose_name_plural = 'Apartamento'
+        unique_together = ['nro_apartamento', 'nro_torre']
 
 
 class Tipo_Persona(models.Model):

@@ -1,7 +1,17 @@
 from django import forms
 from django.contrib.auth.models import User
 
-from .models import Apartamento, Persona, Asamblea, Encuesta, Pregunta
+from .models import (
+    Apartamento, 
+    Persona, 
+    Asamblea, 
+    Encuesta, 
+    Pregunta, 
+    Tipo_Documento, 
+    Tipo_Persona, 
+    Estado_Asamblea, 
+    Estado_Encuesta
+)
 
 # DATA TYPE CLASS
 class TypeDateAsamblea(forms.DateInput):
@@ -17,15 +27,6 @@ class TypeTimeAsamblea(forms.TimeInput):
 
 
 # CREATION CLASS
-class CreateApartamento(forms.ModelForm):
-    class Meta:
-        model = Apartamento
-        fields = [
-            'nro_apartamento',
-            'nro_torre'
-        ]
-
-
 class CreateEncuesta(forms.ModelForm):
     class Meta:
         model = Encuesta
@@ -81,6 +82,41 @@ class CreateAsamblea(forms.ModelForm):
         }
 
 
+class CreateTipoDocumento(forms.ModelForm):
+    class Meta:
+        model = Tipo_Documento
+        fields = [
+            'abreviatura',
+            'descripcion'
+        ]
+
+
+class CreateTipoPersona(forms.ModelForm):
+    class Meta:
+        model = Tipo_Persona
+        fields = [
+            'descripcion'
+        ]
+
+
+class CreateEstadoAsamblea(forms.ModelForm):
+    class Meta:
+        model = Estado_Asamblea
+        fields = [
+            'abreviatura',
+            'descripcion'
+        ]
+
+
+class CreateEstadoEncuesta(forms.ModelForm):
+    class Meta:
+        model = Estado_Encuesta
+        fields = [
+            'abreviatura',
+            'descripcion'
+        ]
+
+
 # UPDATE CLASS
 class UpdateUsuario(forms.ModelForm):
     class Meta:
@@ -134,4 +170,14 @@ class UpdatePregunta(forms.ModelForm):
         model = Pregunta
         fields = [
             'texto_pregunta'
+        ]
+
+
+# GENERAL FORMS
+class FormApartamento(forms.ModelForm):
+    class Meta:
+        model = Apartamento
+        fields = [
+            'nro_apartamento',
+            'nro_torre'
         ]
